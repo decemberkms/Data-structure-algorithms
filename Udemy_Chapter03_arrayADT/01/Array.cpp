@@ -47,7 +47,7 @@ void Array::insert(int index, int x){
     }
 }
 
-int Array::e_delete(int index){
+int Array::Delete(int index){
     int x = 0;
     if (index >= 0 && index < this ->length){
         x = this->A[index];
@@ -57,4 +57,43 @@ int Array::e_delete(int index){
         return x;
     }
     return 0;
+}
+
+void swap(int &x, int &y){
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+int Array::linearSearch(int key){
+    for (int i = 0; i < this->length; ++i)
+        if (this->A[i] == key)
+            return i;
+    return -1;
+}
+
+int Array::binarySearch_loop(int low, int high, int key){
+    while (low <= high){
+        int mid = (low + high) / 2;
+        if (key == A[mid])
+            return mid;
+        else if (key > A[mid])
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+    return -1;
+}
+
+int Array::binarySearch_recursive(int low, int high, int key){
+    if (low <= high){
+        int mid = (low + high) / 2;
+        if (key == A[mid])
+            return mid;
+        else if (key < A[mid])
+            return binarySearch_recursive(low, mid - 1, key);
+        else
+            return binarySearch_recursive(mid + 1, high, key);
+    }
+    return -1;
 }

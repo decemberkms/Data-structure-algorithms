@@ -14,7 +14,13 @@ int main(){
     arr.insert(1, 100);
     arr.display();
 
-    arr.e_delete(1);
+    arr.Delete(1);
     arr.display();
+
+    std::cout << "\nResult index: " << arr.linearSearch(6) << std::endl;
+    std::cout << "Result index: " <<  arr.linearSearch(100) << std::endl;
+
+    std::cout << "\nResult index: " << arr.binarySearch_loop(0,5,3) << std::endl;
+    std::cout << "Result index: " <<  arr.binarySearch_recursive(0,5,8) << std::endl;
     return 0;
 }

@@ -17,12 +17,11 @@ public:
     void display();
     void append(int x);
     void insert(int index, int x);
-    int e_delete(int index);
-
-
+    int Delete(int index);
+    int linearSearch(int key);
+    void swap(int &x, int &y);
+    int binarySearch_loop(int low, int high, int key);
+    int binarySearch_recursive(int low, int high, int key);
 };
-
-
-
 
 #endif
