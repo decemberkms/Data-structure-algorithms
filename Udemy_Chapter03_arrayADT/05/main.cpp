@@ -6,7 +6,7 @@ int main(){
     Array arr(10,5);
     arr.create();
     arr.display();
-    
+    arr.size;
     Array arr2(10, 5);
     arr2.create();
     arr.display();
