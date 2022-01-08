@@ -12,6 +12,7 @@ private:
 public:
     Array(int size);
     Array(int size, int length);
+    Array(int size, int length, int elements[]);
     ~Array();
 
     void create();
@@ -34,6 +35,11 @@ public:
     bool isSorted();
     void negaposisorted();
     Array mergeArrays(Array &arr, int size_combined);
+    Array UnionArrays(Array &arr);
+    Array Intersection(Array &arr);
+    Array Difference(Array &arr);
+
+    
 
 };
 

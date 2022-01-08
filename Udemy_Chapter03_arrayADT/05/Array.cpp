@@ -12,6 +12,17 @@ Array::Array(int size, int length){
     this->length = length;
     A = new int[size];
 }
+
+Array::Array(int size, int length, int elements[]){
+    this->size = size;
+    this->length = length;
+    A = new int[size];
+
+    for (int i = 0; i < length; ++i){
+        A[i] = elements[i];
+    }
+
+}
 //destructor
 Array::~Array(){
     delete [] A;
@@ -206,6 +217,76 @@ Array Array::mergeArrays(Array& arr, int size_combined){
         C.A[k++] = this->A[i];
     for (;j < arr.length; ++j) 
         C.A[k++] = arr.A[j];
+
+    C.length = k;
+
+    return C;
+}
+
+Array Array::UnionArrays(Array &arr){
+    Array C(this->size + arr.size, this->length + arr.length);
+    int i = 0, j = 0, k = 0;
+    
+    while (i < this->length && j < arr.length){
+        if (this->A[i] < arr.A[j]){
+            C.A[k++] = this->A[i++];
+        } else if (arr.A[j] < this->A[i]){
+            C.A[k++] = arr.A[j++];
+        } else{
+            C.A[k++] = this->A[i++];
+            j++;
+        }
+    }   
+
+    for (;i < this->length; ++i)
+        C.A[k++] = this->A[i];
+    for (;j < arr.length; ++j) 
+        C.A[k++] = arr.A[j];
+
+    C.length = k;
+
+    return C;
+}
+
+Array Array::Intersection(Array &arr){
+   Array C(this->size, this->length);
+    int i = 0, j = 0, k = 0;
+    
+    while (i < this->length && j < arr.length){
+        if (this->A[i] < arr.A[j]){
+            i++;
+        } else if (arr.A[j] < this->A[i]){
+            j++;
+        } else{
+            C.A[k++] = this->A[i++];
+            j++;
+        }
+    }   
+
+    C.length = k;
+
+    return C;
+}
+
+Array Array::Difference(Array &arr){
+    Array C(this->size + arr.size, this->length + arr.length);
+    int i = 0, j = 0, k = 0;
+    
+    while (i < this->length && j < arr.length){
+        if (this->A[i] < arr.A[j]){
+            C.A[k++] = this->A[i++];
+        } else if (arr.A[j] < this->A[i]){
+            j++;
+        } else{
+            i++;
+            j++;
+        }
+    }   
+
+    for (;i < this->length; ++i)
+        C.A[k++] = this->A[i];
+
+    C.length = k;
 
     return C;
 }
