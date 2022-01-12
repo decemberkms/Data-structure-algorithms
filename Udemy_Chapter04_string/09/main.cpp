@@ -11,9 +11,9 @@ int main(){
 
     for (int i = 0; A[i] != '\0'; ++i){
         x = 1;
-
+        std::cout <<  std::bitset<32>(x) << std::endl; // bitset anonymous class
         x = x << (A[i] - 97);
-        
+        std::cout <<  std::bitset<32>(x) << std::endl; // bitset anonymous class
         
 
         if (x & H){  // masking (and)
