@@ -38,7 +38,7 @@ public:
         for (int i = 0; i < size; ++i){
             for (int j = 0; j < size; ++j){
                 if (i == j) std::cout << std::setw(3) << "[" << array[i] << "]";
-                else std::cout << std::setw(4) << "[" << 0 << "]";
+                else std::cout << std::setw(3) << "[" << 0 << "]";
             }
             std::cout << std::endl;
         }
