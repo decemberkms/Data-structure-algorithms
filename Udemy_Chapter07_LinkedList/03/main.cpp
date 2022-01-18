@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 class Node{
 public:
@@ -23,6 +24,34 @@ void displayRe2(Node *p){
         }
 }
 
+int count(Node *p){
+    int c {0};
+    while (p != nullptr){
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+
+int sum(Node *p){
+    int sum {0};
+    while (p != nullptr){
+        sum += p->data;
+        p = p->next;
+    }
+    return sum;
+}
+
+auto max_v(Node *p){
+    auto max = INT64_MIN;
+
+    while (p){
+        if (p->data > max)
+            max = p->data;
+        p = p->next;
+    }
+    return max;
+}
 
 int main(){
 
@@ -55,23 +84,12 @@ int main(){
         std::cout << p->data << " -> " << std::flush;
         p = p->next;
     }
-
-
-    std::cout << std::endl;
+    std::cout << "null" << std::endl;
+  
     p = head;
-    displayRe1(p);
-
 
     std::cout << std::endl;
-    p = head;
-    displayRe2(p);
-    std::cout << std::endl;
-    int *a;
-    a = new int;
-    std::cout << "\nAddress of a: "<< a << "\nPinter: " << &a << std::endl;
-    a = new int;
-    std::cout << "Address of a: "<< a << "\nPinter: " << &a << std::endl;
-
+    std::cout <<  max_v(p) << std::endl;
 
     
     return 0;

@@ -23,6 +23,24 @@ void displayRe2(Node *p){
         }
 }
 
+int count(Node *p){
+    int c {0};
+    while (p != nullptr){
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+
+int sum(Node *p){
+    int sum {0};
+    while (p != nullptr){
+        sum += p->data;
+        p = p->next;
+    }
+    return sum;
+}
+
 
 int main(){
 
@@ -55,17 +73,18 @@ int main(){
         std::cout << p->data << " -> " << std::flush;
         p = p->next;
     }
-
-
-    std::cout << std::endl;
+    std::cout << "null" << std::endl;
     p = head;
-    displayRe1(p);
+    
+    std::cout << std::endl;
+
+    std::cout << count(p) << std::endl;
+    std::cout << sum(p) << std::endl;
+   
+    std::cout << std::endl;
 
 
-    std::cout << std::endl;
-    p = head;
-    displayRe2(p);
-    std::cout << std::endl;
+
     int *a;
     a = new int;
     std::cout << "\nAddress of a: "<< a << "\nPinter: " << &a << std::endl;
