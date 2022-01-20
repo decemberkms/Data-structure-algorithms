@@ -4,7 +4,7 @@
 class Node{
 public:
     int data;
-    Node *next; // self deferential class
+    Node *next; // self referential class
 public:
 
 } *first = nullptr;
