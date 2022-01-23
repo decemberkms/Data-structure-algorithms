@@ -18,7 +18,8 @@ public:
     void Display();
     void recursiveDisplay(Node *p);
     void Insert(int index, int x);
-
+    int Delete(int index);
+    int Count();
     Node* getHead(){return head;}
 
     

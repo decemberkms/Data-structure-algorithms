@@ -42,6 +42,16 @@ ClinkList::~ClinkList(){
     }
 }
 
+int ClinkList::Count(){
+    Node *p = head;
+    int count {0};
+    do {
+        p = p->next;
+        count++;
+    }while((p != head));
+    return count;
+}
+
 void ClinkList::Display(){
     Node* p = head;
     do {
@@ -88,4 +98,38 @@ void ClinkList::Insert(int index, int x){
         p->next = temp;
     
     }
+}
+
+int ClinkList::Delete(int index){
+    Node *p;
+    int x;
+
+    if (index < 0 || index > Count())
+        return -1;
+
+    if (index == 0){
+        p = head;
+        while (p->next != head)
+            p = p->next;
+        p->next = head->next;
+        x = head->data;
+        if (p == head){
+            delete head;
+            head = nullptr;
+        } else {
+            delete head;
+            head = p->next;
+        }
+        return x;
+    } else{
+        p = head;
+        for (int i = 0; i < index -2; ++i)
+            p = p->next;
+        Node *q = p->next;
+        p->next = q->next;
+        x = q->data;
+        delete q;
+        return x;
+    }
+
 }
