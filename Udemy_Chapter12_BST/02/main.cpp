@@ -1,0 +1,145 @@
+#include <iostream>
+
+class Node{
+public:
+    int data;
+    Node *lchild;
+    Node *rchild;
+};
+
+class BST{
+private:
+    Node *root;
+
+public:
+    BST(){ root = nullptr; }
+
+    int Height(Node *p){
+        int x, y;
+        
+        if (p == nullptr)
+            return 0;
+
+        x = Height(p->lchild);
+        y = Height(p->rchild);
+
+        return x > y ? x + 1 : y + 1;
+    }
+
+    void Insert(int key){
+        Node *t = root;
+        Node *r, *temp;
+
+        if (root == nullptr){
+            temp = new Node;
+            temp->data = key;
+            temp->lchild = temp->rchild = nullptr;
+            root = temp;
+            return;
+        } 
+
+        while (t != nullptr){
+            r = t;
+
+            if (key < t->data)
+                t = t->lchild;
+            else if (key > t->data)
+                t = t->rchild;
+            else
+                return;
+        }
+
+        temp = new Node;
+        temp->data = key;
+        temp->lchild = temp->rchild = nullptr;
+
+        if (key < r->data) 
+            r->lchild = temp;
+        else
+            r->rchild = temp;
+    }
+
+    void Inorder(Node *temp){
+        if (temp){
+            Inorder(temp->lchild);
+            std::cout << temp->data << " ";
+            Inorder(temp->rchild);
+        }
+    }
+
+    Node *InsertR(Node *p, int key){
+        Node *temp = nullptr;
+
+        if (p == nullptr){
+            temp = new Node;
+            temp->data = key;
+            temp->rchild = temp->lchild = nullptr;
+            if (p == root)
+                root = temp;
+            else 
+                p = temp;
+            return temp;
+        }
+
+
+        if (key < p->data)
+            p->lchild = InsertR(p->lchild, key);
+        else if (key > p->data)
+            p->rchild = InsertR(p->rchild, key);
+            
+        return p;
+    }
+
+    Node* getRoot(){
+        return root;
+    }
+
+    Node* Search(int key){
+        Node *temp = root;
+
+        while (temp){
+            if (key == temp->data)
+                return temp;
+            else if (key < temp->data)
+                temp = temp->lchild;
+            else
+                temp = temp->rchild;           
+        }
+        return nullptr;
+    }
+
+};
+
+
+
+
+int main(){
+    BST mytree;
+
+    std::cout << mytree.getRoot() << std::endl;
+
+    mytree.InsertR(mytree.getRoot(), 10);
+    mytree.InsertR(mytree.getRoot(), 5);
+    mytree.InsertR(mytree.getRoot(), 1);
+    mytree.InsertR(mytree.getRoot(), 11);
+    mytree.InsertR(mytree.getRoot(), 12);
+    mytree.InsertR(mytree.getRoot(), 3);
+    mytree.InsertR(mytree.getRoot(), 30);
+
+    mytree.Inorder(mytree.getRoot());
+
+    std::cout << "\n";
+    std::cout << mytree.Height(mytree.getRoot()) << std::endl;
+    std::cout << "\n";
+
+    Node *t = mytree.Search(1);
+
+    if (t)
+        std::cout << "found"<< std::endl;
+    else
+        std::cout << "not found" << std::endl;
+
+
+
+    return 0;
+}
