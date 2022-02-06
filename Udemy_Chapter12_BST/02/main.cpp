@@ -108,6 +108,54 @@ public:
         return nullptr;
     }
 
+
+    Node *InPre(Node *p){
+        while(p && p->rchild != nullptr)
+            p = p->rchild;
+        return p;
+    }
+
+
+    Node *InSucc(Node *p){
+        while(p && p->lchild != nullptr)
+            p = p->lchild;
+        return p;
+    }
+
+    Node* Delete(Node *p, int key){
+
+        Node *q;
+
+        if (p == nullptr)
+            return nullptr;
+        
+        if (p->lchild == nullptr && p->rchild == nullptr){
+            if (p == root)
+                root =  nullptr;
+            delete p;
+            return nullptr;
+        }
+
+        if (key < p->data)
+            p->lchild = Delete(p->lchild, key);
+        else if (key > p->data)
+            p->rchild = Delete(p->rchild, key);
+        else {
+            if (Height(p->lchild) > Height(p->rchild)){
+                q = InPre(p->lchild);
+                p->data = q->data;
+                p->lchild = Delete(p->lchild, q->data);
+            }else{
+                q = InSucc(p->rchild);
+                p->data = q->data;
+                p->rchild = Delete(p->rchild, q->data);
+            }
+
+                
+        }
+        return p;
+    }
+
 };
 
 
@@ -127,6 +175,12 @@ int main(){
     mytree.InsertR(mytree.getRoot(), 30);
 
     mytree.Inorder(mytree.getRoot());
+    mytree.Delete(mytree.getRoot(), 10);
+    mytree.Delete(mytree.getRoot(), 11);
+    mytree.Delete(mytree.getRoot(), 1);
+    std::cout << "\n";
+    mytree.Inorder(mytree.getRoot());
+
 
     std::cout << "\n";
     std::cout << mytree.Height(mytree.getRoot()) << std::endl;
