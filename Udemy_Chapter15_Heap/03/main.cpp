@@ -5,11 +5,11 @@ using namespace std;
 void Insert(int A[], int n){
     int i = n;
     int temp = A[n];
-
-    while (i > 0 && temp > A[i % 2 == 0 ? (i / 2) - 1: i / 2]){
-        A[i] = A[i % 2 == 0 ? (i / 2) - 1 : i /2];
-        i = i % 2 == 0 ? (i / 2) - 1 : i / 2;
+    while (i > 0 && temp > A[i % 2 == 0 ? (i/2)-1 : i/2]){
+        A[i] = A[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
     }
+    
     A[i] = temp;    
 }
 
@@ -52,17 +52,16 @@ void swap(int A[], int i, int j){
 
 int Delete2(int A[], int n){
     int x = A[0];  // Max element
-    int lastele = A[n - 1];
-    A[n] = x;
-    A[0] = lastele;
+    // A[n - 1] = x;
+    A[0] = A[n - 1];
     
     int i = 0;
     int j = 2 * i + 1;
  
-    while (j + 1 <= n-1){
+    while (j < n-1){
         // Compare left and right children
-        if (j < n - 1 && A[j] < A[j+1]){
-            j = j+1;
+        if (A[j+1] > A[j]){
+            j = j + 1;
         }
  
         // Compare parent and largest child
@@ -100,10 +99,12 @@ int main(){
     createHeap(arr, sizeof(arr) / sizeof(int));
     Print(arr, sizeof(arr) / sizeof(int), 'a');
 
-    Delete2(arr, sizeof(arr) / sizeof(int));
+    int a =  Delete2(arr, sizeof(arr) / sizeof(int));
+    std::cout << "Deleted: " << a << std::endl;
     Print(arr, sizeof(arr) / sizeof(int), 'a');
-    Delete2(arr, sizeof(arr) / sizeof(int));
-    Delete2(arr, sizeof(arr) / sizeof(int));
+    Delete2(arr, sizeof(arr) / sizeof(int) - 1);
+    Print(arr, sizeof(arr) / sizeof(int), 'a');
+    Delete2(arr, sizeof(arr) / sizeof(int) - 2);
     Print(arr, sizeof(arr) / sizeof(int), 'a');
     return 0;
 }
