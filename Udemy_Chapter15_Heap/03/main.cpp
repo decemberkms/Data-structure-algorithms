@@ -52,13 +52,14 @@ void swap(int A[], int i, int j){
 
 int Delete2(int A[], int n){
     int x = A[0];  // Max element
-    // A[n - 1] = x;
-    A[0] = A[n - 1];
+    int last_ele = A[n - 1];
+    A[n - 1] = x;
+    A[0] = last_ele;
     
     int i = 0;
     int j = 2 * i + 1;
  
-    while (j < n-1){
+    while (j < n - 2){
         // Compare left and right children
         if (A[j+1] > A[j]){
             j = j + 1;
@@ -102,9 +103,26 @@ int main(){
     int a =  Delete2(arr, sizeof(arr) / sizeof(int));
     std::cout << "Deleted: " << a << std::endl;
     Print(arr, sizeof(arr) / sizeof(int), 'a');
+    
     Delete2(arr, sizeof(arr) / sizeof(int) - 1);
+    std::cout << "Deleted: " << a << std::endl;
     Print(arr, sizeof(arr) / sizeof(int), 'a');
+
     Delete2(arr, sizeof(arr) / sizeof(int) - 2);
+    std::cout << "Deleted: " << a << std::endl;
     Print(arr, sizeof(arr) / sizeof(int), 'a');
+
+    Delete2(arr, sizeof(arr) / sizeof(int) - 3);
+    std::cout << "Deleted: " << a << std::endl;
+    Print(arr, sizeof(arr) / sizeof(int), 'a');
+
+    Delete2(arr, sizeof(arr) / sizeof(int) - 4);
+    std::cout << "Deleted: " << a << std::endl;
+    Print(arr, sizeof(arr) / sizeof(int), 'a');
+
+    Delete2(arr, sizeof(arr) / sizeof(int) - 5);
+    std::cout << "Deleted: " << a << std::endl;
+    Print(arr, sizeof(arr) / sizeof(int), 'a');
+
     return 0;
 }
