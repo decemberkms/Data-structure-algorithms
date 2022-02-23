@@ -1,6 +1,6 @@
 #include <iostream>
 #define SIZE 10
-// linear probing
+//Quadaric probing
 using namespace std;
  
 template <class T>
@@ -19,20 +19,20 @@ int Hash(int key){
     return key % SIZE;
 }
  
-int LinearProbe(int H[], int key){
+int QuadraticProbe(int H[], int key){
     int idx = Hash(key);
     int i = 0;
-    while (H[(idx+i) % SIZE] != 0){
+    while (H[(idx+i*i) % SIZE] != 0){
         i++;
     }
-    return (idx + i) % SIZE;
+    return (idx + i*i) % SIZE;
 }
  
 void Insert(int H[], int key){
     int idx = Hash(key);
  
     if (H[idx] != 0){
-        idx = LinearProbe(H, key);
+        idx = QuadraticProbe(H, key);
     }
     H[idx] = key;
 }
@@ -40,13 +40,13 @@ void Insert(int H[], int key){
 int Search(int H[], int key){
     int idx = Hash(key);
     int i = 0;
-    while (H[(idx+i) % SIZE] != key){
+    while (H[(idx+i*i) % SIZE] != key){
         i++;
-        if (H[(idx + i) % SIZE] == 0){
+        if (H[(idx + i*i) % SIZE] == 0){
             return -1;
         }
     }
-    return (idx + i) % SIZE;
+    return (idx + i*i) % SIZE;
 }
  
  
